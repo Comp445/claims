@@ -55,14 +55,14 @@ public final class PhaseOne {
 				.collect(toList());
 		Files.write(Paths.get("outPut.txt"),(Iterable<String>)sortedBuffer::iterator,StandardOpenOption.CREATE, StandardOpenOption.APPEND);
 	}
-	//writes multi files of buffer size each
+	//writes multi-files of buffer size each
 	private static void xFiles() throws IOException
 	{
 		//open input file to stream
 		BufferedReader file = Files.newBufferedReader(Paths.get("input.txt"));
 		while((line = file.readLine()) != null )
 		{//this loop limits the buffer depending on heap size
-			while(line!=null && tuples <45000)
+			while(line!=null && tuples <500)
 			{
 				buffer.add(line.substring(18,27)+ line.substring(241,250));//adds string to buffer
 				tuples++;//keeps count of tuples in buffer
