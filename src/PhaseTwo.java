@@ -12,11 +12,12 @@ import java.util.List;
 //class that runs second phase of TPMMS
 public final class PhaseTwo {
 	//variables
+	static final int maxTupples= 150;
 	static List<BufferedReader> filePointers = new ArrayList<BufferedReader>();//used to hold pointers to file
 	static List<String> buffer =  new ArrayList<String>(); //hold a string value from each file
 	static int passes = 0;//hold number of passes phase two will do
-	static int endIndex = 0;//used to hold the end index value of the buffer files
-	static int end = PhaseOne.fileCounter<=150 ? PhaseOne.fileCounter : 150;//used to hold the end index value of the buffer files
+	static int endFileNo = 0;//used to hold the end index value of the buffer files
+	static int end = PhaseOne.fileCounter<=maxTupples ? PhaseOne.fileCounter : maxTupples;//used to hold the end index value of the buffer files
 	
 	//private constructor and final class all methods are static to simulate static class like C++
 	private PhaseTwo() {
@@ -41,27 +42,26 @@ public final class PhaseTwo {
 		{//create pointer to each file created in phase one up to heap size
 			for(int i=0; i<end;i++)
 			{
-				filePointers.add(Files.newBufferedReader(Paths.get("f"+(i+endIndex))));
+				filePointers.add(Files.newBufferedReader(Paths.get("f"+(i+endFileNo))));
 				buffer.add(filePointers.get(i).readLine());
 			}
 			//merge files from buffer using filePointers
-			merge();
-			
+			merge();			
 			//will go around again if not fully merged			
-			passes++;//increase pass number 
-			endIndex = endIndex+150 <PhaseOne.fileCounter+passes-1 ? endIndex+150: endIndex+PhaseOne.fileCounter+passes-1; //this calculates the last file index
-			end = end - endIndex; //get the end of the next forloop
-			flag = endIndex < PhaseOne.fileCounter ? true:false;//this will end loop if greater then number of files	
+			passes++;//increase pass number 			
+			endFileNo = passes * maxTupples  ; //this calculates the last file index	
+			end = maxTupples < (PhaseOne.fileCounter+passes) - endFileNo ? maxTupples:  (PhaseOne.fileCounter+passes) - endFileNo ; //get the end of the next forloop
+			flag =  end>0 ? true:false;//this will end loop if greater then number of files	
 			buffer.clear();//clear buffer ready for next round
 			filePointers.clear();//clear the file pointers ready for next round
 		}
 	
-		System.out.println(passes);
+		System.out.println("Phase two took "+passes+ " Passes to complete.");
 	}
 	//merges files writes to new file 
 	private static void merge() throws IOException 
 	{//variables
-		double leastValue ; //holds the max value in the buffer
+		int leastCID ; //holds the max value in the buffer
         int leastIndex ;	//the index of the buffer where the max value exists
         boolean elementsLeft=true;//the loop continues while this is true
         FileWriter file = new FileWriter("f"+(PhaseOne.fileCounter+passes));
@@ -69,11 +69,11 @@ public final class PhaseTwo {
         
 		while(elementsLeft)
 		{//for statement to find max value and index of max value
-			leastValue = Double.parseDouble(buffer.get(0).substring(10));
+			leastCID = Integer.parseInt(buffer.get(0).substring(0,9));
 			leastIndex = 0;
 	        for (int i = 1; i < buffer.size(); i++) {
-	            if (Double.parseDouble(buffer.get(i).substring(10)) < leastValue) {//enters if only if value is greater
-	                leastValue = Double.parseDouble(buffer.get(i).substring(9));
+	            if (Integer.parseInt(buffer.get(i).substring(0,9)) < leastCID) {//enters if only if value is greater
+	                leastCID = Integer.parseInt(buffer.get(i).substring(0,9));
 	                leastIndex = i;
 	            }
 	    	}//endof for loop
@@ -90,8 +90,6 @@ public final class PhaseTwo {
             {	
             	buffer.set(leastIndex, newValue);
             }
-            leastValue=0;
-            leastIndex = -1;
             if (buffer.size()==0)//if all values are removed end while loop
             	elementsLeft = false;
 	        

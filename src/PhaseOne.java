@@ -62,7 +62,7 @@ public final class PhaseOne {
 		BufferedReader file = Files.newBufferedReader(Paths.get("input.txt"));
 		while((line = file.readLine()) != null )
 		{//this loop limits the buffer depending on heap size
-			while(line!=null && tuples <500)
+			while(line!=null && tuples <50)
 			{
 				buffer.add(line.substring(18,27)+ line.substring(241,250));//adds string to buffer
 				tuples++;//keeps count of tuples in buffer
