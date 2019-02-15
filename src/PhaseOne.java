@@ -11,8 +11,6 @@ import static java.util.stream.Collectors.*;
 //class that runs first phase of TPMMS
 public final class PhaseOne {
 	 //variables
-	final int maxTupple;//holds the max number of tuple depending on heap size
-	final String fileName; //files name from input
 	static String line;//buffer to hold line of the file
 	static List<String> buffer =  new ArrayList<String>(); //hold a list of CID and  Amount-paid as one string per tuple per
 	static int tuples = 1;//number of tuples to insert in buffer
@@ -21,8 +19,6 @@ public final class PhaseOne {
 	
 	//private constructor and final class all methods are static to simulate static class like in C++
 	private PhaseOne(int heapSize, String fileName){
-		maxTupple = heapSize;
-		this.fileName = fileName;
 	}	
 	
 	//starts the phase one process
@@ -62,7 +58,7 @@ public final class PhaseOne {
 		BufferedReader file = Files.newBufferedReader(Paths.get("input.txt"));
 		while((line = file.readLine()) != null )
 		{//this loop limits the buffer depending on heap size
-			while(line!=null && tuples <5000)
+			while(line!=null && tuples <Main.maxTuples)
 			{
 				buffer.add(line.substring(18,27)+ line.substring(241,250));//adds string to buffer
 				tuples++;//keeps count of tuples in buffer

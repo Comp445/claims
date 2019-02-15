@@ -12,12 +12,12 @@ import java.util.List;
 //class that runs second phase of TPMMS
 public final class PhaseTwo {
 	//variables
-	static final int maxTupples= 150;
+	
 	static List<BufferedReader> filePointers = new ArrayList<BufferedReader>();//used to hold pointers to file
 	static List<String> buffer =  new ArrayList<String>(); //hold a string value from each file
 	static int passes = 0;//hold number of passes phase two will do
 	static int endFileNo = 0;//used to hold the end index value of the buffer files
-	static int end = PhaseOne.fileCounter<=maxTupples ? PhaseOne.fileCounter : maxTupples;//used to hold the end index value of the buffer files
+	static int end = PhaseOne.fileCounter<=Main.maxFiles ? PhaseOne.fileCounter : Main.maxFiles;//used to hold the end index value of the buffer files
 	
 	//private constructor and final class all methods are static to simulate static class like C++
 	private PhaseTwo() {
@@ -49,8 +49,8 @@ public final class PhaseTwo {
 			merge();			
 			//will go around again if not fully merged			
 			passes++;//increase pass number 			
-			endFileNo = passes * maxTupples  ; //this calculates the last file index	
-			end = maxTupples < (PhaseOne.fileCounter+passes) - endFileNo ? maxTupples:  (PhaseOne.fileCounter+passes) - endFileNo ; //get the end of the next forloop
+			endFileNo = passes * Main.maxFiles  ; //this calculates the last file index	
+			end = Main.maxFiles < (PhaseOne.fileCounter+passes) - endFileNo ? Main.maxFiles:  (PhaseOne.fileCounter+passes) - endFileNo ; //get the end of the next forloop
 			flag =  end>0 ? true:false;//this will end loop if greater then number of files	
 			buffer.clear();//clear buffer ready for next round
 			filePointers.clear();//clear the file pointers ready for next round
