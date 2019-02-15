@@ -1,5 +1,7 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -46,7 +48,8 @@ public final class PhaseTwo {
 				buffer.add(filePointers.get(i).readLine());
 			}
 			//merge files from buffer using filePointers
-			merge();			
+			//merge();
+			mergeIntoOneFile();
 			//will go around again if not fully merged			
 			passes++;//increase pass number 			
 			endFileNo = passes * Main.maxFiles  ; //this calculates the last file index	
@@ -76,7 +79,7 @@ public final class PhaseTwo {
 	                leastCID = Integer.parseInt(buffer.get(i).substring(0,9));
 	                leastIndex = i;
 	            }
-	    	}//endof for loop
+	    	}//end of for loop
             //write max to new file and numbered at end
             writer.write(buffer.get(leastIndex)+"\n");
             //get next round ready
@@ -95,6 +98,58 @@ public final class PhaseTwo {
 	        
 		}//endof while loop
 		writer.close();
+		PhaseOne.fileCounter=PhaseOne.fileCounter+passes;
+	}
+	
+	//This method is intended to test if merging into a single file is faster.
+	private static void mergeIntoOneFile() throws IOException {
+		int leastCID ; //holds the max value in the buffer
+        int leastIndex ;	//the index of the buffer where the max value exists
+        boolean elementsLeft=true;//the loop continues while this is true
+        File file = new File("/home/negar/Desktop/phaseTwo");
+        FileWriter fileToWrite = new FileWriter(file);
+        BufferedWriter writer = new BufferedWriter(fileToWrite);
+		
+        while(elementsLeft) {
+        	//for statement to find max value and index of max value
+        	//if the single file is empty read from the buffer
+        	if(file.length() == 0) {
+        		//this means that the file is empty and we are in the first round of merging
+        		//and we need to read from the buffer for the first time
+        		leastCID = Integer.parseInt(buffer.get(0).substring(0,9));
+        	}
+        	else {
+        		BufferedReader br = new BufferedReader(new FileReader(file));
+        		leastCID = Integer.parseInt(br.readLine().substring(0,9));	
+        	}
+			
+			leastIndex = 0;
+			for (int i = 1; i < buffer.size(); i++) {
+				// in the next if I should just check the next value
+				//with the least value in the single file
+	            if (Integer.parseInt(buffer.get(i).substring(0,9)) < leastCID) {//enters if only if value is greater
+	                leastCID = Integer.parseInt(buffer.get(i).substring(0,9));
+	                leastIndex = i;
+	            }
+	    	}//endof for loop
+			//write max to new file and numbered at end
+            writer.write(buffer.get(leastIndex)+"\n");
+            //get next round ready
+            String newValue =filePointers.get(leastIndex).readLine();//get new value from the specific file
+            if (newValue==null)//check to see if endof file is reached
+            {//if reached remove value and pointer
+            	filePointers.remove(leastIndex); //remove pointer from filePointer
+            	buffer.remove(leastIndex); //remove value from index
+            }
+            else//put in new value in buffer
+            {	
+            	buffer.set(leastIndex, newValue);
+            }
+            if (buffer.size()==0)//if all values are removed end while loop
+            	elementsLeft = false;
+            
+        }//end of while loop
+        writer.close();
 		PhaseOne.fileCounter=PhaseOne.fileCounter+passes;
 	}
 		
