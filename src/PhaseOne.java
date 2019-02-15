@@ -62,7 +62,7 @@ public final class PhaseOne {
 		BufferedReader file = Files.newBufferedReader(Paths.get("input.txt"));
 		while((line = file.readLine()) != null )
 		{//this loop limits the buffer depending on heap size
-			while(line!=null && tuples <50)
+			while(line!=null && tuples <5000)
 			{
 				buffer.add(line.substring(18,27)+ line.substring(241,250));//adds string to buffer
 				tuples++;//keeps count of tuples in buffer
@@ -72,7 +72,7 @@ public final class PhaseOne {
 				buffer.add(line.substring(18,27)+ line.substring(241,250));
 			
 			writeTo_xFile();//write the files in sorted order
-			tuples=1;//reset tuple count to zero
+			tuples=1;//reset tuple count to one
 			buffer.clear();//clear buffer to get it ready to fill again if necessary			
 		}
 		

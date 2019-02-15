@@ -95,6 +95,7 @@ public final class PhaseTwo {
 	        
 		}//endof while loop
 		writer.close();
+		PhaseOne.fileCounter=PhaseOne.fileCounter+passes;
 	}
 		
 }//end of class
