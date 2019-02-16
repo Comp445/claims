@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 //class that runs second phase of TPMMS
 public final class PhaseTwo {
@@ -39,13 +40,29 @@ public final class PhaseTwo {
 	
 	//this method intends to sort a single file tuple by tuple
 	private static void readfiles() throws IOException{
-		boolean flag = true;//this is used to see if a block is read completely or no
-		int blockcount = 1 ;
-		String line1;
-		String line2;
-		while(blockcount <=400){
-			
+	//	boolean flag = true;//this is used to see if a block is read completely or no
+	//	int blockcount = 1 ;
+		File input = new File("/home/n/n_adeghi/git/claims/output.txt");
+		BufferedReader br = new BufferedReader(new FileReader(input));
+		String lineBlock1;
+		String lineBlock2;
+		int lineNumber;
+		int blocklines = 400;
+		//we need to read the first line of each block which starts at 1 , 401 , 801,...
+		//then add this line to the buffer
+		while(br.readLine() != null){
+			buffer.add(br.readLine());
+			for(lineNumber = 1 ; lineNumber < 1000000 ; lineNumber = lineNumber + blocklines){
+				br.readLine();
+			}
+			buffer.add(br.readLine());
 		}
+//		while(br.readLine() != null){
+//			
+//		}
+//			try (Stream<String> lines = Files.lines(Paths.get("/home/n/n_adeghi/git/claims/output.txt"))) {
+//			 lineBlock2 = lines.skip(blocklines).findFirst().get();
+//			}
 		
 	}
 	private static void xFiles() throws IOException
