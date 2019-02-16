@@ -1,4 +1,8 @@
+import java.io.IOException;
 import java.lang.management.ManagementFactory;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class Main {
@@ -12,7 +16,7 @@ public class Main {
 		List<String> inputArguments = ManagementFactory.getRuntimeMXBean().getInputArguments();
 		if(inputArguments.get(0).contentEquals("-Xmx5m"))
 		{
-			maxTuples = 45000;
+			maxTuples = 50;
 			maxFiles = 150;
 			System.out.println("Using -Xmx5m heapsize");
 		}
@@ -35,7 +39,19 @@ public class Main {
 		PhaseTwo.start();
 		final long endTime =System.currentTimeMillis();
 		System.out.println("Execution Time: " + ((endTime-startTime)/1000.0) + " secs");
-		FinalPrint.start();		
+		FinalPrint.start();
+		//cleanup files
+		
+		try {
+		
+			for (int i =0; i<PhaseOne.fileCounter+1; i++)
+			{
+				Files.deleteIfExists(Paths.get("f"+i));
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
