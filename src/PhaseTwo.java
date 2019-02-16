@@ -29,14 +29,16 @@ public final class PhaseTwo {
 	{//holds a pointer to each file and write one big file in sorted order
 		System.out.println("Phase two started");
 		try {
-			xFiles();
-			
+		//	xFiles();
+			readfiles();
 		}catch(IOException io) {
 		       io.printStackTrace();
 		    }	
 
 	}//end of start
-	
+	private static void readfiles() throws IOException{
+		
+	}
 	private static void xFiles() throws IOException
 	{
 		boolean flag = true; //used to see if all files created were merged or not
@@ -48,8 +50,8 @@ public final class PhaseTwo {
 				buffer.add(filePointers.get(i).readLine());
 			}
 			//merge files from buffer using filePointers
-			//merge();
-			mergeIntoOneFile();
+			merge();
+			//mergeIntoOneFile();
 			//will go around again if not fully merged			
 			passes++;//increase pass number 			
 			endFileNo = passes * Main.maxFiles  ; //this calculates the last file index	
@@ -106,7 +108,7 @@ public final class PhaseTwo {
 		int leastCID ; //holds the max value in the buffer
         int leastIndex ;	//the index of the buffer where the max value exists
         boolean elementsLeft=true;//the loop continues while this is true
-        File file = new File("/home/negar/Desktop/phaseTwo");
+        File file = new File("/home/n/n_adeghi/git/claims/phaseTwo");
         FileWriter fileToWrite = new FileWriter(file);
         BufferedWriter writer = new BufferedWriter(fileToWrite);
 		

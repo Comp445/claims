@@ -27,8 +27,8 @@ public final class PhaseOne {
 	try {
 		//will enter the loop if there's any data in file
 		System.out.println("Phase one started");
-		xFiles();	
-		//oneFile();
+		//xFiles();	
+		oneFile();
       
     } catch(IOException io) {
        io.printStackTrace();
