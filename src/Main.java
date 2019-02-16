@@ -30,8 +30,9 @@ public class Main {
 			System.exit(0);;
 		}
 		
-		final long startTime =System.currentTimeMillis();
+		
 		PhaseOne.start();
+		final long startTime =System.currentTimeMillis();
 		PhaseTwo.start();
 		final long endTime =System.currentTimeMillis();
 		System.out.println("Execution Time: " + ((endTime-startTime)/1000.0) + " secs");

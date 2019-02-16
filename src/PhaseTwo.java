@@ -29,14 +29,23 @@ public final class PhaseTwo {
 	{//holds a pointer to each file and write one big file in sorted order
 		System.out.println("Phase two started");
 		try {
-		//	xFiles();
-			readfiles();
+			xFiles();
+			//readfiles();
 		}catch(IOException io) {
 		       io.printStackTrace();
 		    }	
 
 	}//end of start
+	
+	//this method intends to sort a single file tuple by tuple
 	private static void readfiles() throws IOException{
+		boolean flag = true;//this is used to see if a block is read completely or no
+		int blockcount = 1 ;
+		String line1;
+		String line2;
+		while(blockcount <=400){
+			
+		}
 		
 	}
 	private static void xFiles() throws IOException
