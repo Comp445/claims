@@ -3,9 +3,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +48,7 @@ public final class PhaseTwo {
 			//will go around again if not fully merged			
 			passes++;//increase pass number 			
 			endFileNo = passes * Main.maxFiles  ; //this calculates the last file index	
-			end = Main.maxFiles < (PhaseOne.fileCounter+passes) - endFileNo ? Main.maxFiles:  (PhaseOne.fileCounter+passes) - endFileNo ; //get the end of the next forloop
+			end = Main.maxFiles < (PhaseOne.fileCounter) - endFileNo ? Main.maxFiles:  (PhaseOne.fileCounter) - endFileNo ; //get the end of the next forloop
 			flag =  end>0 ? true:false;//this will end loop if greater then number of files	
 			buffer.clear();//clear buffer ready for next round
 			filePointers.clear();//clear the file pointers ready for next round
@@ -64,7 +62,7 @@ public final class PhaseTwo {
 		int leastCID ; //holds the max value in the buffer
         int leastIndex ;	//the index of the buffer where the max value exists
         boolean elementsLeft=true;//the loop continues while this is true
-        FileWriter file = new FileWriter("f"+(PhaseOne.fileCounter+passes));
+        FileWriter file = new FileWriter("f"+(PhaseOne.fileCounter));
         BufferedWriter writer = new BufferedWriter(file);
         
 		while(elementsLeft)
@@ -95,7 +93,7 @@ public final class PhaseTwo {
 	        
 		}//endof while loop
 		writer.close();
-		PhaseOne.fileCounter=PhaseOne.fileCounter+passes;
+		PhaseOne.fileCounter++;
 	}
 		
 }//end of class

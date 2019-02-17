@@ -16,13 +16,13 @@ public class Main {
 		List<String> inputArguments = ManagementFactory.getRuntimeMXBean().getInputArguments();
 		if(inputArguments.get(0).contentEquals("-Xmx5m"))
 		{
-			maxTuples = 50;
+			maxTuples = 15;
 			maxFiles = 150;
 			System.out.println("Using -Xmx5m heapsize");
 		}
 		else if(inputArguments.get(0).contentEquals("-Xmx10m"))
 		{
-			maxTuples = 90000;
+			maxTuples = 15;
 			maxFiles = 150;
 			System.out.println("Using -Xmx10m heapsize");
 		}
@@ -40,8 +40,8 @@ public class Main {
 		final long endTime =System.currentTimeMillis();
 		System.out.println("Execution Time: " + ((endTime-startTime)/1000.0) + " secs");
 		FinalPrint.start();
-		//cleanup files
 		
+		//cleanup files
 		try {
 		
 			for (int i =0; i<PhaseOne.fileCounter+1; i++)
