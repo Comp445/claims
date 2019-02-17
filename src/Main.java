@@ -4,7 +4,7 @@ import java.util.List;
 public class Main {
 
 	static int maxTuples; // Maximum amount of files depending on heap size
-	static int maxFiles; // maximum amount of files that can be opened depending on heapsize
+	static int maxFiles; // maximum amount of files that can be opened depending on heap size
 			
 	public static void main(String[] args) {
 		
@@ -32,8 +32,10 @@ public class Main {
 		
 		
 		PhaseOne.start();
+		System.out.println("Number of disk I/Os for a block of 100 tuples in Phase One:" + PhaseOne.iocount);
 		final long startTime =System.currentTimeMillis();
 		PhaseTwo.start();
+		System.out.println("Number of disk I/Os for a block of 100 tuples in Phase Two:" + PhaseTwo.iocount);
 		final long endTime =System.currentTimeMillis();
 		System.out.println("Execution Time: " + ((endTime-startTime)/1000.0) + " secs");
 		FinalPrint.start();		

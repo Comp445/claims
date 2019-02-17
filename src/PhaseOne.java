@@ -16,6 +16,7 @@ public final class PhaseOne {
 	static int tuples = 1;//number of tuples to insert in buffer
 	static int fileCounter=0; /*used to name and count files saved on disk,
 	 							NOTE will hold one more than then actual number of files created because count starts at one but file name starts at 0 */
+	static int iocount = 0 ;
 	
 	//private constructor and final class all methods are static to simulate static class like in C++
 	private PhaseOne(int heapSize, String fileName){
@@ -42,6 +43,7 @@ public final class PhaseOne {
 			.sorted()
 			.collect(toList());
 		Files.write(path, sortedBuffer);
+		iocount++;
 		fileCounter++;
 	}
 	private static void writeTo_OneFile() throws IOException
@@ -55,10 +57,11 @@ public final class PhaseOne {
 	private static void xFiles() throws IOException
 	{
 		//open input file to stream
-		BufferedReader file = Files.newBufferedReader(Paths.get("input.txt"));
+		BufferedReader file = Files.newBufferedReader(Paths.get("input1.txt"));
+		iocount++;
 		while((line = file.readLine()) != null )
 		{//this loop limits the buffer depending on heap size
-			while(line!=null && tuples <Main.maxTuples)
+			while(line!=null && tuples <100)
 			{
 				buffer.add(line.substring(18,27)+ line.substring(241,250));//adds string to buffer
 				tuples++;//keeps count of tuples in buffer

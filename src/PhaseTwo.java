@@ -21,6 +21,7 @@ public final class PhaseTwo {
 	static int passes = 0;//hold number of passes phase two will do
 	static int endFileNo = 0;//used to hold the end index value of the buffer files
 	static int end = PhaseOne.fileCounter<=Main.maxFiles ? PhaseOne.fileCounter : Main.maxFiles;//used to hold the end index value of the buffer files
+	static int iocount = 0 ;
 	
 	//private constructor and final class all methods are static to simulate static class like C++
 	private PhaseTwo() {
@@ -73,6 +74,7 @@ public final class PhaseTwo {
 			for(int i=0; i<end;i++)
 			{
 				filePointers.add(Files.newBufferedReader(Paths.get("f"+(i+endFileNo))));
+				iocount++;
 				buffer.add(filePointers.get(i).readLine());
 			}
 			//merge files from buffer using filePointers
@@ -110,6 +112,7 @@ public final class PhaseTwo {
 	    	}//end of for loop
             //write max to new file and numbered at end
             writer.write(buffer.get(leastIndex)+"\n");
+            iocount++;
             //get next round ready
             String newValue =filePointers.get(leastIndex).readLine();//get new value from the specific file
             if (newValue==null)//check to see if endof file is reached
