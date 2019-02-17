@@ -43,6 +43,9 @@ public final class PhaseOne {
 			.sorted()
 			.collect(toList());
 		Files.write(path, sortedBuffer);
+		/**
+		 * I added a counter here
+		 */
 		iocount++;
 		fileCounter++;
 	}
@@ -58,6 +61,9 @@ public final class PhaseOne {
 	{
 		//open input file to stream
 		BufferedReader file = Files.newBufferedReader(Paths.get("input1.txt"));
+		/**
+		 * I added a counter here
+		 */
 		iocount++;
 		while((line = file.readLine()) != null )
 		{//this loop limits the buffer depending on heap size

@@ -74,6 +74,9 @@ public final class PhaseTwo {
 			for(int i=0; i<end;i++)
 			{
 				filePointers.add(Files.newBufferedReader(Paths.get("f"+(i+endFileNo))));
+				/**
+				 * I added a counter here
+				 */
 				iocount++;
 				buffer.add(filePointers.get(i).readLine());
 			}
@@ -112,6 +115,9 @@ public final class PhaseTwo {
 	    	}//end of for loop
             //write max to new file and numbered at end
             writer.write(buffer.get(leastIndex)+"\n");
+            /**
+    		 * I added a counter here
+    		 */
             iocount++;
             //get next round ready
             String newValue =filePointers.get(leastIndex).readLine();//get new value from the specific file

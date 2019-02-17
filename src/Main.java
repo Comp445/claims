@@ -38,6 +38,7 @@ public class Main {
 		System.out.println("Number of disk I/Os for a block of 100 tuples in Phase Two:" + PhaseTwo.iocount);
 		final long endTime =System.currentTimeMillis();
 		System.out.println("Execution Time: " + ((endTime-startTime)/1000.0) + " secs");
+		System.out.println("Total number of disk I/Os for block size of 100 tuples:"+ (PhaseOne.fileCounter+PhaseTwo.iocount));
 		FinalPrint.start();		
 	}
 
