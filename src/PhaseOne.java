@@ -55,7 +55,7 @@ public final class PhaseOne {
 	private static void xFiles() throws IOException
 	{
 		//open input file to stream
-		BufferedReader file = Files.newBufferedReader(Paths.get("input.txt"));
+		BufferedReader file = Files.newBufferedReader(Paths.get("newInput.txt"));
 		while((line = file.readLine()) != null )
 		{//this loop limits the buffer depending on heap size
 			while(line!=null && tuples <Main.maxTuples)
@@ -77,7 +77,7 @@ public final class PhaseOne {
 	private static void oneFile() throws IOException
 	{
 		//open input file to stream
-		BufferedReader file = Files.newBufferedReader(Paths.get("input.txt"));
+		BufferedReader file = Files.newBufferedReader(Paths.get("newInput.txt"));
 		while((line = file.readLine()) != null )
 		{
 			while(line!=null && tuples <400)
