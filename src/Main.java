@@ -1,4 +1,8 @@
+import java.io.IOException;
 import java.lang.management.ManagementFactory;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class Main {
@@ -12,13 +16,13 @@ public class Main {
 		List<String> inputArguments = ManagementFactory.getRuntimeMXBean().getInputArguments();
 		if(inputArguments.get(0).contentEquals("-Xmx5m"))
 		{
-			maxTuples = 45000;
+			maxTuples = 15;
 			maxFiles = 150;
 			System.out.println("Using -Xmx5m heapsize");
 		}
 		else if(inputArguments.get(0).contentEquals("-Xmx10m"))
 		{
-			maxTuples = 90000;
+			maxTuples = 15;
 			maxFiles = 150;
 			System.out.println("Using -Xmx10m heapsize");
 		}
@@ -39,7 +43,21 @@ public class Main {
 		final long endTime =System.currentTimeMillis();
 		System.out.println("Execution Time: " + ((endTime-startTime)/1000.0) + " secs");
 		System.out.println("Total number of disk I/Os for block size of 100 tuples:"+ (PhaseOne.fileCounter+PhaseTwo.iocount));
-		FinalPrint.start();		
+		FinalPrint.start();
+		
+		//cleanup files
+		try {
+			System.out.println("Cleaning File");
+			for (int i =0; i<PhaseOne.fileCounter+1; i++)
+			{
+				Files.deleteIfExists(Paths.get("f"+i));
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("done...");
 	}
 
 }

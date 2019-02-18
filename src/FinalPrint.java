@@ -24,7 +24,8 @@ public final class FinalPrint {
 	static void start()
 	{
 		try {
-			BufferedReader FileR = Files.newBufferedReader(Paths.get("f"+PhaseOne.fileCounter));//opens our final file for printing
+			System.out.println("Final Print started");
+			BufferedReader FileR = Files.newBufferedReader(Paths.get("f"+(PhaseOne.fileCounter-1)));//opens our final file for printing
 			FileWriter fileW = new FileWriter("output.txt");
 	        BufferedWriter writer = new BufferedWriter(fileW);
 	        prevLines = FileR.readLine();
