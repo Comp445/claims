@@ -16,13 +16,13 @@ public class Main {
 		List<String> inputArguments = ManagementFactory.getRuntimeMXBean().getInputArguments();
 		if(inputArguments.get(0).contentEquals("-Xmx5m"))
 		{
-			maxTuples = 15;
-			maxFiles = 150;
+			maxTuples =45000;
+			maxFiles = 150; 
 			System.out.println("Using -Xmx5m heapsize");
 		}
 		else if(inputArguments.get(0).contentEquals("-Xmx10m"))
 		{
-			maxTuples = 15;
+			maxTuples = 80000;
 			maxFiles = 150;
 			System.out.println("Using -Xmx10m heapsize");
 		}
@@ -34,10 +34,9 @@ public class Main {
 			System.exit(0);;
 		}
 		
-		
-		PhaseOne.start();
-		System.out.println("Number of disk I/Os for a block of 100 tuples in Phase One:" + PhaseOne.iocount);
 		final long startTime =System.currentTimeMillis();
+		PhaseOne.start();
+		System.out.println("Number of disk I/Os for a block of 100 tuples in Phase One:" + PhaseOne.iocount);		
 		PhaseTwo.start();
 		System.out.println("Number of disk I/Os for a block of 100 tuples in Phase Two:" + PhaseTwo.iocount);
 		final long endTime =System.currentTimeMillis();

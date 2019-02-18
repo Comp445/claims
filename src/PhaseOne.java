@@ -49,13 +49,13 @@ public final class PhaseOne {
 		iocount++;
 		fileCounter++;
 	}
-	private static void writeTo_OneFile() throws IOException
-	{
-		List<String> sortedBuffer =buffer .stream()
-				.sorted()
-				.collect(toList());
-		Files.write(Paths.get("outPut.txt"),(Iterable<String>)sortedBuffer::iterator,StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-	}
+//	private static void writeTo_OneFile() throws IOException
+//	{
+//		List<String> sortedBuffer =buffer .stream()
+//				.sorted()
+//				.collect(toList());
+//		Files.write(Paths.get("outPut.txt"),(Iterable<String>)sortedBuffer::iterator,StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+//	}
 	//writes multi-files of buffer size each
 	private static void xFiles() throws IOException
 	{
