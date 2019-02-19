@@ -5,9 +5,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.stream.Stream;
-import static java.util.stream.Collectors.*;
 
 //this is used to print results and as per professor will not be part of the calculation time.
 public final class FinalPrint {

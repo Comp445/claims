@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.stream.Collectors.*;
@@ -16,7 +15,8 @@ public final class PhaseOne {
 	static int tuples = 1;//number of tuples to insert in buffer
 	static int fileCounter=0; /*used to name and count files saved on disk,
 	 							NOTE will hold one more than then actual number of files created because count starts at one but file name starts at 0 */
-	static int iocount = 0 ;//used for calculating IO in phase 2
+	static int ioCount = 0 ;//used for calculating IO in phase 1
+	static int numTuples=0;//used to count the number of tuples in input file
 	
 	//private constructor and final class all methods are static to simulate static class like in C++
 	private PhaseOne(int heapSize, String fileName){
@@ -46,7 +46,7 @@ public final class PhaseOne {
 		/**
 		 * I added a counter here
 		 */
-		iocount++;
+		ioCount++;
 		fileCounter++;
 	}
 //	private static void writeTo_OneFile() throws IOException
@@ -61,19 +61,21 @@ public final class PhaseOne {
 	{
 		//open input file to stream
 		BufferedReader file = Files.newBufferedReader(Paths.get("input.txt"));
+		line = file.readLine();
 		/**
 		 * I added a counter here
 		 */
-		iocount++;
-		while((line = file.readLine()) != null )
+		ioCount++;
+		while(line  != null )
 		{//this loop limits the buffer depending on heap size
 			while(line!=null && tuples <Main.maxTuples)
 			{
 				buffer.add(line.substring(18,27)+ line.substring(241,250));//adds string to buffer
 				tuples++;//keeps count of tuples in buffer
 				line = file.readLine();
+				numTuples++;
 			}
-			if(line!=null)//inserts last tuple in buffer if count is reached
+			if(line!=null)//inserts last tuple in buffer if count is not reached
 				buffer.add(line.substring(18,27)+ line.substring(241,250));
 			
 			writeTo_xFile();//write the files in sorted order

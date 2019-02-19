@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -36,12 +35,12 @@ public class Main {
 		
 		final long startTime =System.currentTimeMillis();
 		PhaseOne.start();
-		System.out.println("Number of disk I/Os for a block of 100 tuples in Phase One:" + PhaseOne.iocount);		
+		System.out.println("Number of disk I/Os for blocks of 15 tuples in Phase One:" + PhaseOne.ioCount);		
 		PhaseTwo.start();
-		System.out.println("Number of disk I/Os for a block of 100 tuples in Phase Two:" + PhaseTwo.iocount);
+		System.out.println("Number of disk I/Os for blocks of 15 tuples in Phase Two:" + PhaseTwo.iocount);
 		final long endTime =System.currentTimeMillis();
 		System.out.println("Execution Time: " + ((endTime-startTime)/1000.0) + " secs");
-		System.out.println("Total number of disk I/Os for block size of 100 tuples:"+ (PhaseOne.fileCounter+PhaseTwo.iocount));
+		System.out.println("Total number of disk I/Os for blocks of 15 tuples:"+ (PhaseOne.fileCounter+PhaseTwo.iocount));
 		FinalPrint.start();
 		
 		//cleanup files
