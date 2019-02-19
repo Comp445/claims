@@ -13,7 +13,7 @@ public class Main {
 		
 		//check the VM heap argument
 		List<String> inputArguments = ManagementFactory.getRuntimeMXBean().getInputArguments();
-		if(inputArguments.get(0).contentEquals("-Xmx5m"))
+		if(inputArguments.get(1).contentEquals("-Xmx5m"))
 		{
 			maxTuples =45000;
 			maxFiles = 150; 
