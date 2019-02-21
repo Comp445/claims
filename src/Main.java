@@ -13,15 +13,15 @@ public class Main {
 		
 		//check the VM heap argument
 		List<String> inputArguments = ManagementFactory.getRuntimeMXBean().getInputArguments();
-		if(inputArguments.get(1).contentEquals("-Xmx5m"))
+		if(inputArguments.get(0).contentEquals("-Xmx5m"))
 		{
-			maxTuples =1000;
+			maxTuples =4000;
 			maxFiles = 100; 
 			System.out.println("Using -Xmx5m heapsize");
 		}
 		else if(inputArguments.get(0).contentEquals("-Xmx10m"))
 		{
-			maxTuples = 75000;
+			maxTuples = 8000;
 			maxFiles = 100;
 			System.out.println("Using -Xmx10m heapsize");
 		}

@@ -5,7 +5,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import static java.util.stream.Collectors.*;
 
 //class that runs first phase of TPMMS
 public final class PhaseOne {
@@ -26,8 +25,7 @@ public final class PhaseOne {
 	public static void start() {
 
 	try {
-		//will enter the loop if there's any data in file
-		
+		//will enter the loop if there's any data in file		
 		xFiles();	
 		System.out.println("Phase one started");
 		//oneFile();
@@ -40,24 +38,18 @@ public final class PhaseOne {
 	private static void writeTo_xFile() throws IOException
 	{//sorts and writes to file
 		Path path = Paths.get("f"+fileCounter);
-		List<String> sortedBuffer =buffer.stream()
-			.sorted((x,y)-> x.substring(18,27).compareTo(y.substring(18, 27)) )
-			.collect(toList());
-		Files.write(path, sortedBuffer);
+//		List<String> sortedBuffer =buffer.stream()
+//			.sorted((x,y)-> x.substring(18,27).compareTo(y.substring(18, 27)) )
+//			.collect(toList());
+		buffer.sort((x,y)-> x.substring(18,27).compareTo(y.substring(18, 27)));
+		Files.write(path,buffer);
 		/**
 		 * I added a counter here
 		 */
 		ioCount++;
 		fileCounter++;
 	}
-//	private static void writeTo_OneFile() throws IOException
-//	{
-//		List<String> sortedBuffer =buffer .stream()
-//				.sorted()
-//				.collect(toList());
-//		Files.write(Paths.get("outPut.txt"),(Iterable<String>)sortedBuffer::iterator,StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-//	}
-	//writes multi-files of buffer size each
+
 	private static void xFiles() throws IOException
 	{
 		//open input file to stream
@@ -84,31 +76,8 @@ public final class PhaseOne {
 			writeTo_xFile();//write the files in sorted order
 			tuples=0;//reset tuple count to one
 			buffer.clear();//clear buffer to get it ready to fill again if necessary			
-		}
-		
+		}		
 	}		
-	//write one file of buffers using seek
-//	private static void oneFile() throws IOException
-//	{
-//		//open input file to stream
-//		BufferedReader file = Files.newBufferedReader(Paths.get("input.txt"));
-//		while((line = file.readLine()) != null )
-//		{
-//			while(line!=null && tuples <400)
-//			{
-//				buffer.add(line.substring(18,27)+ line.substring(241,250));//adds string to buffer
-//				tuples++;//keeps count of tuples in buffer
-//				line = file.readLine();
-//			}
-//			if(line!=null)//inserts last tuple in buffer if count is reached
-//				buffer.add(line.substring(18,27)+ line.substring(241,250));
-//			
-//			writeTo_OneFile();//write the files in sorted order
-//			tuples=0;//reset tuple count to zero
-//			buffer.clear();//clear buffer to get it ready to fill again if necessary	
-//		}		
-//	}
-	
 }//endof PhaseOne
 
 

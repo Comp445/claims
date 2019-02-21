@@ -28,40 +28,12 @@ public final class PhaseTwo {
 		System.out.println("Phase two started");
 		try {
 			xFiles();
-			//readfiles();
 		}catch(IOException io) {
 		       io.printStackTrace();
 		    }	
 
 	}//end of start
 	
-	//this method intends to sort a single file tuple by tuple
-//	private static void readfiles() throws IOException{
-//	//	boolean flag = true;//this is used to see if a block is read completely or no
-//	//	int blockcount = 1 ;
-//		File input = new File("/home/n/n_adeghi/git/claims/output.txt");
-//		BufferedReader br = new BufferedReader(new FileReader(input));
-//		String lineBlock1;
-//		String lineBlock2;
-//		int lineNumber;
-//		int blocklines = 400;
-//		//we need to read the first line of each block which starts at 1 , 401 , 801,...
-//		//then add this line to the buffer
-//		while(br.readLine() != null){
-//			buffer.add(br.readLine());
-//			for(lineNumber = 1 ; lineNumber < 1000000 ; lineNumber = lineNumber + blocklines){
-//				br.readLine();
-//			}
-//			buffer.add(br.readLine());
-//		}
-////		while(br.readLine() != null){
-////			
-////		}
-////			try (Stream<String> lines = Files.lines(Paths.get("/home/n/n_adeghi/git/claims/output.txt"))) {
-////			 lineBlock2 = lines.skip(blocklines).findFirst().get();
-////			}
-//		
-//	}
 	private static void xFiles() throws IOException
 	{
 		boolean flag = true; //used to see if all files created were merged or not
@@ -133,57 +105,5 @@ public final class PhaseTwo {
 		writer.close();
 		PhaseOne.fileCounter++;
 	}
-	
-	//This method is intended to test if merging into a single file is faster.
-//	private static void mergeIntoOneFile() throws IOException {
-//		int leastCID ; //holds the max value in the buffer
-//        int leastIndex ;	//the index of the buffer where the max value exists
-//        boolean elementsLeft=true;//the loop continues while this is true
-//        File file = new File("/home/n/n_adeghi/git/claims/phaseTwo");
-//        FileWriter fileToWrite = new FileWriter(file);
-//        BufferedWriter writer = new BufferedWriter(fileToWrite);
-//		
-//        while(elementsLeft) {
-//        	//for statement to find max value and index of max value
-//        	//if the single file is empty read from the buffer
-//        	if(file.length() == 0) {
-//        		//this means that the file is empty and we are in the first round of merging
-//        		//and we need to read from the buffer for the first time
-//        		leastCID = Integer.parseInt(buffer.get(0).substring(0,9));
-//        	}
-//        	else {
-//        		BufferedReader br = new BufferedReader(new FileReader(file));
-//        		leastCID = Integer.parseInt(br.readLine().substring(0,9));	
-//        	}
-//			
-//			leastIndex = 0;
-//			for (int i = 1; i < buffer.size(); i++) {
-//				// in the next if I should just check the next value
-//				//with the least value in the single file
-//	            if (Integer.parseInt(buffer.get(i).substring(0,9)) < leastCID) {//enters if only if value is greater
-//	                leastCID = Integer.parseInt(buffer.get(i).substring(0,9));
-//	                leastIndex = i;
-//	            }
-//	    	}//endof for loop
-//			//write max to new file and numbered at end
-//            writer.write(buffer.get(leastIndex)+"\n");
-//            //get next round ready
-//            String newValue =filePointers.get(leastIndex).readLine();//get new value from the specific file
-//            if (newValue==null)//check to see if endof file is reached
-//            {//if reached remove value and pointer
-//            	filePointers.remove(leastIndex); //remove pointer from filePointer
-//            	buffer.remove(leastIndex); //remove value from index
-//            }
-//            else//put in new value in buffer
-//            {	
-//            	buffer.set(leastIndex, newValue);
-//            }
-//            if (buffer.size()==0)//if all values are removed end while loop
-//            	elementsLeft = false;
-//            
-//        }//end of while loop
-//        writer.close();
-//		PhaseOne.fileCounter=PhaseOne.fileCounter+passes;
-//	}
 		
 }//end of class
