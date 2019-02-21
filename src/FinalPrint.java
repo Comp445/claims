@@ -17,7 +17,9 @@ public final class FinalPrint {
 	static String lines;	//hold the lines of final output file
 	static String prevLines; //holds previous line to compare with lines to group and count value
 	static boolean flag;//true if there are more tuples in final file false otherwise
-	
+	static int index ;
+	static List<String> buffer =  new ArrayList<String>(10);//holds top 10 claim values
+	static String leastValue;	//holds the leastValue in buffer
 	
 	private FinalPrint(){		
 	}
@@ -66,26 +68,21 @@ public final class FinalPrint {
 		try {
 			//variables
 			String line;//holds the read line
-			List<String> buffer =  new ArrayList<String>(10);//holds top 10 claim values
+
 			
 			BufferedReader fileR = Files.newBufferedReader(Paths.get("output.txt"));//opens our final file for printing
 			FileWriter fileW = new FileWriter("top10Claims.txt");
 			BufferedWriter writer = new BufferedWriter(fileW);
-
-			
+		
 			for (int i =0; i <10;i++)//fill buffer
 				buffer.add(fileR.readLine());
+			
 			while((line=fileR.readLine())!=null)
-			{
-				for (int i =0; i <10;i++)//check if value is bigger than any in buffer
-				{
-					if((Double.parseDouble(line.substring(11))) > ( Double.parseDouble(buffer.get(i).substring(11))))
-					{
-						buffer.set(i,line);
-						break;
-					}
-
-				}
+			{//if line read is less then the leastValue then replace in buffer at least value
+				leastValue =getLeast();//get least value in buffer
+				if((Double.parseDouble(line.substring(11))) > ( Double.parseDouble(leastValue.substring(11))))
+					buffer.set(index,line);
+				
 			}
 			//java 8 stream for sorting and writing the top 10 claims
 			buffer.stream() .sorted( (x,y)-> -Double.compare(Double.parseDouble(x.substring(11)), Double.parseDouble(y.substring(11)) ))
@@ -96,13 +93,28 @@ public final class FinalPrint {
 					e.printStackTrace();
 				}
 			});
-			writer.close();
-			
-			
+			writer.close();					
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
+
+	private static String getLeast() {
+		index=0;//set index to first element
+		leastValue = buffer.get(index);//set the leastValue to first in buffer
+		for (int i =1; i <10;i++)//check if value is bigger than any in buffer
+		{
+			if((Double.parseDouble(buffer.get(i).substring(11))) < ( Double.parseDouble(leastValue.substring(11))))
+			{
+				index =i;
+				leastValue = buffer.get(index);
+				
+			}
+		}
+		
+		return leastValue;//finds the least value in the buffer to be switched with largest
+		
 		
 	}
 
