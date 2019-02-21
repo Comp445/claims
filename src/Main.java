@@ -15,14 +15,14 @@ public class Main {
 		List<String> inputArguments = ManagementFactory.getRuntimeMXBean().getInputArguments();
 		if(inputArguments.get(1).contentEquals("-Xmx5m"))
 		{
-			maxTuples =45000;
-			maxFiles = 150; 
+			maxTuples =1000;
+			maxFiles = 100; 
 			System.out.println("Using -Xmx5m heapsize");
 		}
 		else if(inputArguments.get(0).contentEquals("-Xmx10m"))
 		{
-			maxTuples = 80000;
-			maxFiles = 150;
+			maxTuples = 75000;
+			maxFiles = 100;
 			System.out.println("Using -Xmx10m heapsize");
 		}
 		else 

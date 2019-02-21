@@ -6,9 +6,8 @@ import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Stream;
+
 
 //this is used to print results and as per professor will not be part of the calculation time.
 public final class FinalPrint {
@@ -32,24 +31,24 @@ public final class FinalPrint {
 			FileWriter fileW = new FileWriter("output.txt");
 	        BufferedWriter writer = new BufferedWriter(fileW);
 	        prevLines = FileR.readLine();
-	        prevLines = prevLines.substring(0,9)+ " $"+ prevLines.substring(9);
+	        prevLines = prevLines.substring(18,27)+ " $"+ prevLines.substring(241);
 	        flag = prevLines !=null ? true:false;	//set the flag to true if there are tuples in file
 	        
 			while(flag)
 			{//will compare prevLine with lines and add claim value		
 				lines=FileR.readLine();
 				flag = lines !=null ? true:false;
-				if(flag && lines.substring(0,9).equals(prevLines.substring(0,9))) 
+				if(flag && lines.substring(18,27).equals(prevLines.substring(0,9))) 
 				{	//BigDecimal is for double not to lose accuracy
 					BigDecimal value1 = new BigDecimal(prevLines.substring(11));
-					BigDecimal value2 = new BigDecimal(lines.substring(9));
+					BigDecimal value2 = new BigDecimal(lines.substring(241));
 					String total = (value1.add(value2)).toString();//adds line and prevLine together
 					prevLines = prevLines.substring(0,9)+ " $" + total;
 				}
 				else if(flag)
 				{
 					writer.write(prevLines+"\n");
-					prevLines =  lines.substring(0,9)+ " $"+ lines.substring(9);;
+					prevLines =  lines.substring(18,27)+ " $"+ lines.substring(241);;
 				}
 							
 				
@@ -113,9 +112,7 @@ public final class FinalPrint {
 			}
 		}
 		
-		return leastValue;//finds the least value in the buffer to be switched with largest
-		
-		
+		return leastValue;//finds the least value in the buffer to be switched with largest		
 	}
 
 }

@@ -101,11 +101,11 @@ public final class PhaseTwo {
         
 		while(elementsLeft)
 		{//for statement to find max value and index of max value
-			leastCID = Integer.parseInt(buffer.get(0).substring(0,9));
+			leastCID = Integer.parseInt(buffer.get(0).substring(18,27));
 			leastIndex = 0;
 	        for (int i = 1; i < buffer.size(); i++) {
-	            if (Integer.parseInt(buffer.get(i).substring(0,9)) < leastCID) {//enters if only if value is greater
-	                leastCID = Integer.parseInt(buffer.get(i).substring(0,9));
+	            if (Integer.parseInt(buffer.get(i).substring(18,27)) < leastCID) {//enters if only if value is greater
+	                leastCID = Integer.parseInt(buffer.get(i).substring(18,27));
 	                leastIndex = i;
 	            }
 	    	}//end of for loop
