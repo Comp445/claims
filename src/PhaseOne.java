@@ -23,12 +23,12 @@ public final class PhaseOne {
 	
 	//starts the phase one process
 	public static void start() {
-
 	try {
 		//will enter the loop if there's any data in file		
-		xFiles();	
 		System.out.println("Phase one started");
-		//oneFile();
+		xFiles();	
+		ioCount = 2*numTuples;
+		
       
     } catch(IOException io) {
        io.printStackTrace();
@@ -43,10 +43,6 @@ public final class PhaseOne {
 //			.collect(toList());
 		buffer.sort((x,y)-> x.substring(18,27).compareTo(y.substring(18, 27)));
 		Files.write(path,buffer);
-		/**
-		 * I added a counter here
-		 */
-		ioCount++;
 		fileCounter++;
 	}
 
@@ -54,11 +50,7 @@ public final class PhaseOne {
 	{
 		//open input file to stream
 		BufferedReader file = Files.newBufferedReader(Paths.get("input.txt"));
-		
-		/**
-		 * I added a counter here
-		 */
-		ioCount++;
+
 		while((line = file.readLine())!= null )
 		{//this loop limits the buffer depending on heap size
 			while(line!=null && tuples <Main.maxTuples)

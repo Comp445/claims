@@ -16,13 +16,13 @@ public class Main {
 		if(inputArguments.get(0).contentEquals("-Xmx5m"))
 		{
 			maxTuples =4000;
-			maxFiles = 100; 
+			maxFiles = 75; 
 			System.out.println("Using -Xmx5m heapsize");
 		}
 		else if(inputArguments.get(0).contentEquals("-Xmx10m"))
 		{
-			maxTuples = 8000;
-			maxFiles = 100;
+			maxTuples = 7000;
+			maxFiles = 75;
 			System.out.println("Using -Xmx10m heapsize");
 		}
 		else 
@@ -35,12 +35,12 @@ public class Main {
 		
 		final long startTime =System.currentTimeMillis();
 		PhaseOne.start();
-		System.out.println("Number of disk I/Os for blocks of 15 tuples in Phase One:" + PhaseOne.ioCount);		
+		System.out.println("Number of disk I/Os for blocks or 15 Phase One:" + PhaseOne.ioCount);		
 		PhaseTwo.start();
-		System.out.println("Number of disk I/Os for blocks of 15 tuples in Phase Two:" + PhaseTwo.iocount);
+		System.out.println("Number of disk I/Os for blocks of 15 tuples in Phase Two:" + PhaseTwo.ioCount);
 		final long endTime =System.currentTimeMillis();
 		System.out.println("Execution Time: " + ((endTime-startTime)/1000.0) + " secs");
-		System.out.println("Total number of disk I/Os for blocks of 15 tuples:"+ (PhaseOne.fileCounter+PhaseTwo.iocount));
+		System.out.println("Total number of disk I/Os for blocks of 15 tuples:"+ (PhaseOne.ioCount+PhaseTwo.ioCount));
 		FinalPrint.start();
 		
 		//cleanup files

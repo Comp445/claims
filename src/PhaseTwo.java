@@ -17,7 +17,7 @@ public final class PhaseTwo {
 	static int passes = 0;//hold number of passes phase two will do
 	static int endFileNo = 0;//used to hold the end index value of the buffer files
 	static int end = PhaseOne.fileCounter<=Main.maxFiles ? PhaseOne.fileCounter : Main.maxFiles;//used to hold the end index value of the buffer files
-	static int iocount = 0 ;//used for calculating IO in phase 2
+	static int ioCount = 0 ;//used for calculating IO in phase 2
 	
 	//private constructor and final class all methods are static to simulate static class like C++
 	private PhaseTwo() {
@@ -28,6 +28,7 @@ public final class PhaseTwo {
 		System.out.println("Phase two started");
 		try {
 			xFiles();
+			ioCount = PhaseOne.numTuples;
 		}catch(IOException io) {
 		       io.printStackTrace();
 		    }	
@@ -45,7 +46,7 @@ public final class PhaseTwo {
 				/**
 				 * I added a counter here
 				 */
-				iocount++;
+				ioCount++;
 				buffer.add(filePointers.get(i).readLine());
 			}
 			//merge files from buffer using filePointers
@@ -86,7 +87,7 @@ public final class PhaseTwo {
             /**
     		 * I added a counter here
     		 */
-            iocount++;
+            ioCount++;
             //get next round ready
             String newValue =filePointers.get(leastIndex).readLine();//get new value from the specific file
             if (newValue==null)//check to see if endof file is reached
@@ -104,6 +105,5 @@ public final class PhaseTwo {
 		}//endof while loop
 		writer.close();
 		PhaseOne.fileCounter++;
-	}
-		
+	}		
 }//end of class
