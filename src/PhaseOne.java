@@ -27,7 +27,7 @@ public final class PhaseOne {
 		//will enter the loop if there's any data in file		
 		System.out.println("Phase one started");
 		xFiles();	
-		ioCount = 2*numTuples;
+		ioCount = (int)( Math.ceil(numTuples/15.0)+Math.ceil(numTuples/15.0));
 		
       
     } catch(IOException io) {

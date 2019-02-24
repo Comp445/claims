@@ -28,7 +28,7 @@ public final class PhaseTwo {
 		System.out.println("Phase two started");
 		try {
 			xFiles();
-			ioCount = PhaseOne.numTuples;
+			ioCount = (int) Math.ceil(PhaseOne.numTuples/15.0);
 		}catch(IOException io) {
 		       io.printStackTrace();
 		    }	
